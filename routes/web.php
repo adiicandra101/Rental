@@ -23,22 +23,31 @@ Auth::routes([
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-//hanya untuk role admin
-Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], function () {
-    Route::get('/', function () {
-        return 'halaman admin';
-    });
-    Route::get('profile', function () {
-        return 'halaman profil admin';
-    });
+//hanya untuk admin
+//Route::group(['prefix' => 'admin', 'middleware' =>['auth', 'role::admin']], function(){
+//    Route::get('/', function(){
+//        return 'Halaman Admin';
+//    });
+//    Route::get('profi', function(){
+//        return 'Halaman Profil Admin';
+//    });
+//});
+
+Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
+    Route::get('buku', function () {
+        return view('buku.index');
+    })->middleware(['role:admin|pengguna']);
+    Route::get('pengarang', function () {
+        return view('pengarang.index');
+    })->middleware(['role:admin']);
 });
 
-//hanya untuk role pengguna
-Route::group(['prefix' => 'pengguna', 'middleware' => ['auth', 'role:pengguna']], function () {
-    Route::get('/', function () {
-        return 'halaman pengguna';
-    });
-    Route::get('profile', function () {
-        return 'halaman pengguna';
-    });
-});
+//hanya untuk pengguna
+//Route::group(['prefix' => 'pengguna', 'middleware' =>['auth', 'role::pengguna']], function(){
+//    Route::get('/', function(){
+//        return 'halaman pengguna';
+//    });
+//   Route::get('profi', function(){
+//        return 'Halaman Profil Pengguna';
+//    });
+//});
