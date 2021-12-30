@@ -10,7 +10,7 @@
 
 @section('content')
 
-    Halaman buku
+    Halaman Sopir
 
 @stop
 

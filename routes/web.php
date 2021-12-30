@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 Auth::routes([
-    'register' => false,
+    'register' => true,
 ]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -34,12 +34,19 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //});
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
-    Route::get('buku', function () {
-        return view('buku.index');
+    Route::get('mobil', function () {
+        return view('mobil.index');
     })->middleware(['role:admin|pengguna']);
-    Route::get('pengarang', function () {
-        return view('pengarang.index');
+    Route::get('merek', function () {
+        return view('merek.index');
     })->middleware(['role:admin']);
+    Route::get('Sopir', function () {
+        return view('Sopir.index');
+    })->middleware(['role:admin']);
+    Route::get('booking', function () {
+        return view('booking.index');
+    })->middleware(['role:admin']);
+
 });
 
 //hanya untuk pengguna

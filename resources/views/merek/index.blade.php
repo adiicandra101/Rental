@@ -10,7 +10,8 @@
 
 @section('content')
 
-    Halaman pengarang
+    Halaman Merek
+
 @stop
 
 @section('css')
