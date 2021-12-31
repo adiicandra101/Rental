@@ -6,9 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="jenisBarang" content="">
 
-    <title>RENTAL MOBIL CHAN24</title>
+    <title>Startmin - Bootstrap Admin Theme</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('backend/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -53,6 +53,9 @@
     </div>
     </nav>
 
+
+    <!-- /.col-lg-12 -->
+    {{-- TABLE --}}
     <div id="page-wrapper">
         <div class="container-fluid">
             <div class="row">
@@ -60,61 +63,41 @@
                     <h1 class="page-header">Data Merek</h1>
                 </div>
                 <!-- /.col-lg-12 -->
-                {{-- TABLE --}}
+            </div>
+            <!-- TABLE -->
+            <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Data Merek
-                            <a href="{{ route('merek.create') }}" class="btn btn-primary float-right">Tambah</a>
+                            Tambah Merek
                         </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="table-responsive table-bordered">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Nama merek</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @php $no=1; @endphp
-                                        @foreach ($merek as $data)
-                                            <tr>
-                                                <td>{{ $no++ }}</td>
-                                                <td>{{ $data->nama_merek }}</td>
-                                                <td>
-                                                    <form action="{{ route('merek.destroy', $data->id) }}"
-                                                        method="post">
-                                                        @method('delete')
-                                                        @csrf
-
-                                                        <a href="{{ route('merek.edit', $data->id) }}"
-                                                            class="btn btn-success float-right">Edit</a>
-                                                        <a href="{{ route('merek.show', $data->id) }}"
-                                                            class="btn btn-warning float-right">Show</a>
-                                                        <button type="submit" class="btn btn-danger"
-                                                            onclick="return confirm('Apakah Anda Yakin Ingin Menghapus ini?');">Delete</button>
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                        <form Action="{{ route('merek.store') }}" method="post">
+                            @csrf
+                            <div class="panel-body">
+                                <label>nama merek</label>
+                                <input type="text" class="form-control" name="nama_merek">
                             </div>
-                            <!-- /.table-responsive -->
-                        </div>
-                        <!-- /.panel-body -->
+                            <div class="panel-body">
+                                <button type="reset" class="btn btn-warning">Reset</button>
+                                <button type="submit" class="btn btn-primary">Tambah</button>
+                            </div>
+                        </form>
                     </div>
-                    <!-- /.panel -->
                 </div>
-                {{-- /TABLE --}}
-                <!-- /.row -->
-                <!-- /.panel-footer -->
             </div>
-            <!-- /.panel .chat-panel -->
+            <!-- /.table-responsive -->
         </div>
-        <!-- /.col-lg-4 -->
+        <!-- /.panel-body -->
+    </div>
+    <!-- /.panel -->
+    </div>
+    {{-- /TABLE --}}
+    <!-- /.row -->
+    <!-- /.panel-footer -->
+    </div>
+    <!-- /.panel .chat-panel -->
+    </div>
+    <!-- /.col-lg-4 -->
     </div>
     <!-- /.row -->
     </div>

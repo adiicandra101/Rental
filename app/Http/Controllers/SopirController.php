@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Sopir;
 use Illuminate\Http\Request;
 
 class SopirController extends Controller
@@ -14,7 +13,8 @@ class SopirController extends Controller
      */
     public function index()
     {
-        //
+        $merek = Merek::all();
+        return view('sopir.index', compact('sopir'));
     }
 
     /**
@@ -24,7 +24,7 @@ class SopirController extends Controller
      */
     public function create()
     {
-        //
+        return view('sopir.create');
     }
 
     /**
@@ -35,51 +35,72 @@ class SopirController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate(
+            ['nama_sopir' => 'required',
+                'status_sopir' => 'required',
+            ]);
+
+        $merek = new Merek;
+        $merek->nama_merek = $request->nama_merek;
+        $merek->save();
+        return redirect()->route('merek.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Sopir  $sopir
+     * @param  \App\Models\Merek  $merek
      * @return \Illuminate\Http\Response
      */
-    public function show(Sopir $sopir)
+    public function show($id)
     {
-        //
+        $Merek = Merek::findOrFail($id);
+        return view('merek.show', compact('merek'));
+
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Sopir  $sopir
+     * @param  \App\Models\Merek  $merek
      * @return \Illuminate\Http\Response
      */
-    public function edit(Sopir $sopir)
+    public function edit($id)
     {
-        //
+        $merek = Merek::findOrFail($id);
+        return view('merek.edit', compact('merek'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Sopir  $sopir
+     * @param  \App\Models\Merek  $merek
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Sopir $sopir)
+    public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate(
+            ['nama_merek' => 'required',
+            ]);
+
+        $merek = Merek::findOrFail($id);
+        $merek->nama_merek = $request->nama_merek;
+        $merek->save();
+        return redirect()->route('merek.index');
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Sopir  $sopir
+     * @param  \App\Models\Merek  $merek
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Sopir $sopir)
+    public function destroy($id)
     {
-        //
+        $merek = Merek::findOrFail($id);
+        $merek->delete();
+        return redirect()->route('merek.index');
     }
 }

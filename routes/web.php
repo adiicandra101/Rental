@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MerekController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -58,3 +59,4 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 //        return 'Halaman Profil Pengguna';
 //    });
 //});
+Route::resource('merek', MerekController::class);

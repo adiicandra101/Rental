@@ -14,7 +14,8 @@ class MerekController extends Controller
      */
     public function index()
     {
-        //
+        $merek = Merek::all();
+        return view('merek.index', compact('merek'));
     }
 
     /**
@@ -24,7 +25,7 @@ class MerekController extends Controller
      */
     public function create()
     {
-        //
+        return view('merek.create');
     }
 
     /**
@@ -35,7 +36,14 @@ class MerekController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate(
+            ['nama_merek' => 'required',
+            ]);
+
+        $merek = new Merek;
+        $merek->nama_merek = $request->nama_merek;
+        $merek->save();
+        return redirect()->route('merek.index');
     }
 
     /**
@@ -44,9 +52,11 @@ class MerekController extends Controller
      * @param  \App\Models\Merek  $merek
      * @return \Illuminate\Http\Response
      */
-    public function show(Merek $merek)
+    public function show($id)
     {
-        //
+        $Merek = Merek::findOrFail($id);
+        return view('merek.show', compact('merek'));
+
     }
 
     /**
@@ -55,9 +65,10 @@ class MerekController extends Controller
      * @param  \App\Models\Merek  $merek
      * @return \Illuminate\Http\Response
      */
-    public function edit(Merek $merek)
+    public function edit($id)
     {
-        //
+        $merek = Merek::findOrFail($id);
+        return view('merek.edit', compact('merek'));
     }
 
     /**
@@ -67,9 +78,17 @@ class MerekController extends Controller
      * @param  \App\Models\Merek  $merek
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Merek $merek)
+    public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate(
+            ['nama_merek' => 'required',
+            ]);
+
+        $merek = Merek::findOrFail($id);
+        $merek->nama_merek = $request->nama_merek;
+        $merek->save();
+        return redirect()->route('merek.index');
+
     }
 
     /**
@@ -78,8 +97,10 @@ class MerekController extends Controller
      * @param  \App\Models\Merek  $merek
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Merek $merek)
+    public function destroy($id)
     {
-        //
+        $merek = Merek::findOrFail($id);
+        $merek->delete();
+        return redirect()->route('merek.index');
     }
 }
