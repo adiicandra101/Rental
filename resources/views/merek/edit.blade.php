@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="jenisBarang" content="">
+    <meta name="merk" content="">
 
     <title>Startmin - Bootstrap Admin Theme</title>
 
@@ -45,7 +45,6 @@
         <!-- /.navbar-top-links -->
 
         <!-- /input-group -->
-        @include('layouts.bagian.sidebar')
         <!-- /.nav-second-level -->
         </li>
         </ul>
@@ -56,40 +55,26 @@
 
     <!-- /.col-lg-12 -->
     {{-- TABLE --}}
-    <div id="page-wrapper">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Data Merek</h1>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Edit Data Merk
                 </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- TABLE -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Tambah Merek
-                        </div>
-                        <form Action="{{ route('merek.store') }}" method="post">
-                            @csrf
-                            <div class="panel-body">
-                                <label>nama merek</label>
-                                <input type="text" class="form-control" name="nama_merek">
-                            </div>
-                            <div class="panel-body">
-                                <button type="reset" class="btn btn-warning">Reset</button>
-                                <button type="submit" class="btn btn-primary">Tambah</button>
-                            </div>
-                        </form>
+                <form Action="{{ route('merek.update', $merek->id) }}" method="post">
+                    @csrf
+                    @method('put')
+                    <div class="panel-body">
+                        <label>Nama Merek</label>
+                        <input type="text" class="form-control" name="nama_merek" value="{{ $merek->nama_merek }}">
                     </div>
-                </div>
+                    <div class="panel-body">
+                        <button type="reset" class="btn btn-warning">Reset</button>
+                        <button type="submit" class="btn btn-primary">Ubah</button>
+                    </div>
+                </form>
             </div>
-            <!-- /.table-responsive -->
         </div>
-        <!-- /.panel-body -->
-    </div>
-    <!-- /.panel -->
     </div>
     {{-- /TABLE --}}
     <!-- /.row -->

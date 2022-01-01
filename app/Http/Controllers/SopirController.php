@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Merek;
 use Illuminate\Http\Request;
 
 class SopirController extends Controller
@@ -13,7 +14,7 @@ class SopirController extends Controller
      */
     public function index()
     {
-        $merek = Merek::all();
+        $sopir = Sopir::all();
         return view('sopir.index', compact('sopir'));
     }
 
@@ -40,10 +41,12 @@ class SopirController extends Controller
                 'status_sopir' => 'required',
             ]);
 
-        $merek = new Merek;
-        $merek->nama_merek = $request->nama_merek;
-        $merek->save();
-        return redirect()->route('merek.index');
+        $sopir = new Merek;
+        $sopir->nama_sopir = $request->nama_sopir;
+        $sopir->status_sopir = $request->status_sopir;
+
+        $sopir->save();
+        return redirect()->route('sopir.index');
     }
 
     /**
@@ -54,8 +57,8 @@ class SopirController extends Controller
      */
     public function show($id)
     {
-        $Merek = Merek::findOrFail($id);
-        return view('merek.show', compact('merek'));
+        $sopir = Sopir::findOrFail($id);
+        return view('sopir.show', compact('sopir'));
 
     }
 
@@ -67,8 +70,8 @@ class SopirController extends Controller
      */
     public function edit($id)
     {
-        $merek = Merek::findOrFail($id);
-        return view('merek.edit', compact('merek'));
+        $sopir = Sopir::findOrFail($id);
+        return view('sopir.edit', compact('sopir'));
     }
 
     /**
@@ -81,12 +84,13 @@ class SopirController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate(
-            ['nama_merek' => 'required',
+            ['nama_sopir' => 'required',
+                'status_sopir' => 'required',
             ]);
 
-        $merek = Merek::findOrFail($id);
-        $merek->nama_merek = $request->nama_merek;
-        $merek->save();
+        $sopir = Sopir::findOrFail($id);
+        $sopir->nama_merek = $request->nama_merek;
+        $sopir->save();
         return redirect()->route('merek.index');
 
     }

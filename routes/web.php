@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MerekController;
+use App\Http\Controllers\SopirController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -60,3 +61,4 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 //    });
 //});
 Route::resource('merek', MerekController::class);
+Route::resource('sopir', SopirController::class);

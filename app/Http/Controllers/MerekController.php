@@ -54,7 +54,7 @@ class MerekController extends Controller
      */
     public function show($id)
     {
-        $Merek = Merek::findOrFail($id);
+        $merek = Merek::findOrFail($id);
         return view('merek.show', compact('merek'));
 
     }

@@ -20,6 +20,7 @@
                 <ul class="nav nav-second-level">
                     <li>
                         <a href="{{ route('merek.index') }}"><i class="fa fa-maxcdn"></i> Merek</a>
+                        <a href="{{ route('sopir.index') }}"><i class="fas fa-user-secret"></i> Sopir</a>
                     </li>
                     <li>
                         <a href="morris.html">merek</a>
